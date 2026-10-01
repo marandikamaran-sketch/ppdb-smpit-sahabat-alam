@@ -499,11 +499,6 @@ function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':
 (async function loadProgramGallery(){try{const r=await fetch('/api/gallery',{cache:'no-store'});if(!r.ok)return;const d=await r.json();renderProgramGallery(d.items||[])}catch(e){}})();
 </script>
 
-function openAlbum(i){
- const a=galleryAlbums[i];
- openCategoryGallery(a.title,a.images);
-}
-
 
  <!-- Histats.com  START -->
 <div id="histats_counter"></div>
