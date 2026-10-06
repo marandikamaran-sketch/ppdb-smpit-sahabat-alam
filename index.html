@@ -101,9 +101,13 @@ section{padding:72px 0}.title{color:var(--g);font-size:34px;line-height:1.2;marg
 .pmb-opening-overlay.closing .pmb-opening-image{transform:scale(.18);opacity:.05}
 @media(max-width:600px){.pmb-opening-overlay{padding:12px}.pmb-opening-image{width:96vw;max-height:86vh;border-radius:14px}.pmb-opening-close{top:10px;right:10px}}
 @media(prefers-reduced-motion:reduce){.pmb-opening-overlay,.pmb-opening-image{transition:none}}
+</style><style>
+.opening-slider-wrap{position:relative;display:flex;align-items:center;justify-content:center}
+.opening-slider-btn{position:absolute;z-index:5;width:48px;height:48px;border:0;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;font-size:35px;cursor:pointer}
+.opening-prev{left:-25px}.opening-next{right:-25px}
+#openingSlide{transition:opacity .3s ease}
+@media(max-width:600px){.opening-slider-btn{width:38px;height:38px;font-size:28px}.opening-prev{left:-10px}.opening-next{right:-10px}}
 </style>
-
-
 <style id="video-gallery-fix">
 .gallery-video-card{cursor:pointer;position:relative;overflow:hidden}
 .gallery-video-card .gallery-media{position:relative;width:100%;height:100%;min-height:220px;overflow:hidden}
@@ -154,8 +158,12 @@ background:linear-gradient(transparent,rgba(0,70,30,.92));color:#fff;font-weight
 <body>
 <div id="pmbOpeningOverlay" class="pmb-opening-overlay" aria-label="Informasi Penerimaan Murid Baru">
   <button class="pmb-opening-close" type="button" aria-label="Tutup">×</button>
-  <img class="pmb-opening-image" src="assets/view.jpg" alt="Sistem Penerimaan Murid Baru Tahun Pelajaran 2027-2028">
-  <div class="pmb-opening-hint">Klik gambar untuk menutup</div>
+  <div class="opening-slider-wrap">
+    <button class="opening-slider-btn opening-prev" type="button">‹</button>
+    <img id="openingSlide" class="pmb-opening-image" src="assets/o1.jpeg" alt="SPMB SMPIT Sahabat Alam">
+    <button class="opening-slider-btn opening-next" type="button">›</button>
+  </div>
+  <div class="pmb-opening-hint">Geser gambar • Klik gambar untuk menutup</div>
 </div>
 
 <nav class="nav"><div class="wrap navin"><a class="brand" href="#top"><img src="assets/logo.jpg"><span>SMPIT SAHABAT ALAM<small>Full Day & Boarding School</small></span></a><div class="links"><a href="#profil">Profil</a><a href="#program">Program</a><a href="#ppdb">SPMB</a><a href="#galeri">Galeri</a><a href="#kontak">Kontak</a></div><a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeKm7PjzB_geLYGV5dZh46S_fk9a0i_iqro5hWJO1VMMEUmCQ/viewform" target="_blank" rel="noopener">Daftar Sekarang</a></div></nav>
@@ -380,17 +388,21 @@ function closeCategoryGallery(){
 
 <script>
 (function(){
-  const overlay=document.getElementById('pmbOpeningOverlay');
-  if(!overlay)return;
-  const img=overlay.querySelector('.pmb-opening-image');
-  const closeBtn=overlay.querySelector('.pmb-opening-close');
-  function openPopup(){overlay.classList.remove('closing');overlay.classList.add('show');document.body.style.overflow='hidden'}
-  function closePopup(){overlay.classList.add('closing');setTimeout(function(){overlay.classList.remove('show','closing');document.body.style.overflow=''},380)}
-  window.addEventListener('load',function(){setTimeout(openPopup,250)});
-  img.addEventListener('click',closePopup);
-  closeBtn.addEventListener('click',closePopup);
-  overlay.addEventListener('click',function(e){if(e.target===overlay)closePopup()});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&overlay.classList.contains('show'))closePopup()});
+const overlay=document.getElementById('pmbOpeningOverlay');
+if(!overlay)return;
+const img=document.getElementById('openingSlide');
+const closeBtn=overlay.querySelector('.pmb-opening-close');
+const images=["assets/o1.jpeg","assets/o2.jpeg","assets/o3.jpeg","assets/o4.jpeg","assets/o5.jpeg"];
+let index=0;
+function slide(i){index=i;img.style.opacity=0;setTimeout(()=>{img.src=images[index];img.style.opacity=1},250)}
+overlay.querySelector('.opening-next').onclick=e=>{e.stopPropagation();slide((index+1)%images.length)};
+overlay.querySelector('.opening-prev').onclick=e=>{e.stopPropagation();slide((index-1+images.length)%images.length)};
+function open(){overlay.classList.add('show');document.body.style.overflow='hidden'}
+function close(){overlay.classList.add('closing');setTimeout(()=>{overlay.classList.remove('show','closing');document.body.style.overflow=''},380)}
+window.addEventListener('load',()=>setTimeout(open,250));
+img.onclick=close;closeBtn.onclick=close;
+overlay.onclick=e=>{if(e.target===overlay)close()};
+setInterval(()=>{if(overlay.classList.contains('show'))slide((index+1)%images.length)},5000);
 })();
 </script>
 
