@@ -1939,328 +1939,320 @@ section{
 <script>
 
 const galleryAlbums = [
-
   {
-    title:'Aktivitas Pembelajaran',
-    cover:'assets/pembelajaran1.jpeg',
-    images:[
+    title: 'Aktivitas Pembelajaran',
+    cover: 'assets/pembelajaran1.jpeg',
+    images: [
       'assets/pembelajaran1.jpeg',
       'assets/pembelajaran2.jpeg'
     ]
   },
-
   {
-    title:'Lingkungan Sekolah',
-    cover:'assets/lingkungan1.jpeg',
-    images:[
+    title: 'Lingkungan Sekolah',
+    cover: 'assets/lingkungan1.jpeg',
+    images: [
       'assets/lingkungan1.jpeg',
       'assets/lingkungan2.jpeg',
       'assets/lingkungan3.jpeg'
     ]
   },
-
   {
-    title:'Kegiatan Sholat Berjamaah',
-    cover:'assets/salat.jpeg',
-    images:[
+    title: 'Kegiatan Sholat Berjamaah',
+    cover: 'assets/salat.jpeg',
+    images: [
       'assets/salat.jpeg'
     ]
   },
-
   {
-    title:'Kegiatan Hafalan Hadist Arbain',
-    cover:'assets/kegiatan-koridor.jpg',
-    images:[
+    title: 'Kegiatan Hafalan Hadist Arbain',
+    cover: 'assets/kegiatan-koridor.jpg',
+    images: [
       'assets/kegiatan-koridor.jpg'
     ]
   }
-
 ];
 
-let currentAlbumImages=[];
-let currentImg=0;
+let currentAlbumImages = [];
+let currentImg = 0;
 
+/* ===============================
+   TAMPILKAN KARTU GALERI
+================================ */
 
-/* RENDER GALERI */
+function renderAlbumGallery() {
 
-function renderAlbumGallery(){
+  const box = document.getElementById('albumGallery');
 
-  const box=document.getElementById('albumGallery');
+  if (!box) {
+    console.error('albumGallery tidak ditemukan');
+    return;
+  }
 
-  if(!box)return;
+  box.innerHTML = galleryAlbums.map((album, index) => {
 
-  box.innerHTML=galleryAlbums.map((a,i)=>`
+    return `
+      <div
+        class="g album-card"
+        style="background-image:url('${album.cover}')"
+        onclick="openAlbum(${index})"
+        role="button"
+        tabindex="0"
+        aria-label="${album.title}"
+      >
+        <span>${album.title}</span>
+      </div>
+    `;
 
-    <div
-      class="g album-card"
-      style="background-image:url('${a.cover}')"
-      onclick="openAlbum(${i})">
+  }).join('');
 
-      <span>${a.title}</span>
+  /* Animasi */
+  document.querySelectorAll('#albumGallery .g').forEach((el, index) => {
 
-    </div>
+    if (index % 2 === 0) {
+      el.classList.add('from-left');
+    } else {
+      el.classList.add('from-right');
+    }
 
-  `).join('');
+    el.addEventListener('keydown', function(e) {
+
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openAlbum(index);
+      }
+
+    });
+
+  });
+
+  /* Observer animasi */
+  const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+      if (entry.isIntersecting) {
+
+        entry.target.classList.add('is-visible');
+
+        observer.unobserve(entry.target);
+
+      }
+
+    });
+
+  }, {
+    threshold: 0.1
+  });
+
+  document
+    .querySelectorAll('#albumGallery .g')
+    .forEach(el => observer.observe(el));
 
 }
 
 
-/* BUKA ALBUM */
+/* ===============================
+   BUKA ALBUM
+================================ */
 
-function openAlbum(i){
+function openAlbum(index) {
 
-  currentAlbumImages=
-    galleryAlbums[i].images.map(src=>({
-      src:src,
-      title:galleryAlbums[i].title
-    }));
+  const album = galleryAlbums[index];
 
-  currentImg=0;
+  if (!album) return;
 
-  const modal=document.getElementById('modal');
+  currentAlbumImages = album.images.map(src => ({
+    src: src,
+    title: album.title
+  }));
+
+  currentImg = 0;
+
+  const modal = document.getElementById('modal');
+
+  if (!modal) return;
 
   modal.classList.add('show');
 
-  document.body.style.overflow='hidden';
+  document.body.style.overflow = 'hidden';
 
   showAlbumImage();
 
 }
 
 
-/* TAMPILKAN GAMBAR */
+/* ===============================
+   TAMPILKAN FOTO
+================================ */
 
-function showAlbumImage(){
+function showAlbumImage() {
 
-  const item=currentAlbumImages[currentImg];
+  if (!currentAlbumImages.length) return;
 
-  if(!item)return;
+  const item = currentAlbumImages[currentImg];
 
-  const img=document.getElementById('modalImg');
+  const img = document.getElementById('modalImg');
+  const caption = document.getElementById('modalCaption');
+  const counter = document.getElementById('modalCounter');
+
+  if (!img) return;
 
   img.classList.remove('lightbox-change');
 
   void img.offsetWidth;
 
-  img.src=item.src;
+  img.src = item.src;
+  img.alt = item.title;
 
-  document.getElementById('modalCaption').textContent=item.title;
+  if (caption) {
+    caption.textContent = item.title;
+  }
 
-  document.getElementById('modalCounter').textContent=
-    `${currentImg+1} / ${currentAlbumImages.length}`;
+  if (counter) {
+    counter.textContent =
+      `${currentImg + 1} / ${currentAlbumImages.length}`;
+  }
 
   img.classList.add('lightbox-change');
 
 }
 
 
-/* NEXT */
+/* ===============================
+   FOTO BERIKUTNYA
+================================ */
 
-function nextImg(){
+function nextImg() {
 
-  if(!currentAlbumImages.length)return;
+  if (!currentAlbumImages.length) return;
 
-  currentImg=
-    (currentImg+1)%currentAlbumImages.length;
-
-  showAlbumImage();
-
-}
-
-
-/* PREVIOUS */
-
-function prevImg(){
-
-  if(!currentAlbumImages.length)return;
-
-  currentImg=
-    (currentImg-1+currentAlbumImages.length)%
-    currentAlbumImages.length;
+  currentImg =
+    (currentImg + 1) % currentAlbumImages.length;
 
   showAlbumImage();
 
 }
 
 
-/* CLOSE */
+/* ===============================
+   FOTO SEBELUMNYA
+================================ */
 
-function closeImg(){
+function prevImg() {
 
-  document
-    .getElementById('modal')
-    .classList.remove('show');
+  if (!currentAlbumImages.length) return;
 
-  document.body.style.overflow='';
+  currentImg =
+    (currentImg - 1 + currentAlbumImages.length)
+    % currentAlbumImages.length;
+
+  showAlbumImage();
 
 }
 
 
-/* KEYBOARD */
+/* ===============================
+   TUTUP GALERI
+================================ */
 
-document.addEventListener('keydown',(e)=>{
+function closeImg() {
 
-  const modal=document.getElementById('modal');
+  const modal = document.getElementById('modal');
 
-  if(!modal.classList.contains('show'))return;
+  if (!modal) return;
 
-  if(e.key==='Escape')closeImg();
+  modal.classList.remove('show');
 
-  if(e.key==='ArrowRight')nextImg();
+  document.body.style.overflow = '';
 
-  if(e.key==='ArrowLeft')prevImg();
+}
+
+
+/* ===============================
+   KEYBOARD
+================================ */
+
+document.addEventListener('keydown', function(e) {
+
+  const modal = document.getElementById('modal');
+
+  if (!modal || !modal.classList.contains('show')) {
+    return;
+  }
+
+  if (e.key === 'Escape') {
+    closeImg();
+  }
+
+  if (e.key === 'ArrowRight') {
+    nextImg();
+  }
+
+  if (e.key === 'ArrowLeft') {
+    prevImg();
+  }
 
 });
 
 
-/* SWIPE HP */
+/* ===============================
+   SWIPE HP
+================================ */
 
-let touchStartX=0;
+let touchStartX = 0;
 
-document
-  .getElementById('modal')
-  .addEventListener('touchstart',(e)=>{
+const galleryModal = document.getElementById('modal');
 
-    touchStartX=e.changedTouches[0].screenX;
+if (galleryModal) {
 
-  },{passive:true});
+  galleryModal.addEventListener(
+    'touchstart',
+    function(e) {
 
-
-document
-  .getElementById('modal')
-  .addEventListener('touchend',(e)=>{
-
-    const dx=
-      e.changedTouches[0].screenX-touchStartX;
-
-    if(Math.abs(dx)>50){
-
-      dx<0
-        ? nextImg()
-        : prevImg();
-
-    }
-
-  },{passive:true});
-
-
-/* ANIMASI SCROLL */
-
-const animatedImages=
-  document.querySelectorAll(
-    '.reveal-img,.gallery .g'
-  );
-
-const observer=
-  new IntersectionObserver(
-    (entries)=>{
-
-      entries.forEach(entry=>{
-
-        if(entry.isIntersecting){
-
-          entry.target.classList.add('is-visible');
-
-          observer.unobserve(entry.target);
-
-        }
-
-      });
+      touchStartX =
+        e.changedTouches[0].screenX;
 
     },
-    {
-      threshold:.16,
-      rootMargin:'0px 0px -50px 0px'
-    }
+    { passive: true }
   );
 
+  galleryModal.addEventListener(
+    'touchend',
+    function(e) {
 
-animatedImages.forEach(el=>
-  observer.observe(el)
-);
+      const touchEndX =
+        e.changedTouches[0].screenX;
 
+      const dx =
+        touchEndX - touchStartX;
 
-setTimeout(()=>{
+      if (Math.abs(dx) > 50) {
 
-  animatedImages.forEach(el=>{
+        if (dx < 0) {
+          nextImg();
+        } else {
+          prevImg();
+        }
 
-    const r=
-      el.getBoundingClientRect();
+      }
 
-    if(
-      r.top<window.innerHeight &&
-      r.bottom>0
-    ){
-
-      el.classList.add('is-visible');
-
-    }
-
-  });
-
-},150);
-
-
-/* RENDER */
-
-renderAlbumGallery();
-
-</script>
-
-
-<!-- =====================================================
-     CATEGORY GALLERY
-     ===================================================== -->
-
-<script>
-
-function openCategoryGallery(title,images){
-
-  document
-    .getElementById('categoryTitle')
-    .textContent=title;
-
-  document
-    .getElementById('categoryImages')
-    .innerHTML=
-      images
-        .map(x=>`
-          <img src="${x}" alt="${title}">
-        `)
-        .join('');
-
-  document
-    .getElementById('categoryModal')
-    .classList.add('show');
-
-  document.body.style.overflow='hidden';
+    },
+    { passive: true }
+  );
 
 }
 
 
-function closeCategoryGallery(){
+/* ===============================
+   JALANKAN GALERI
+================================ */
 
-  document
-    .getElementById('categoryModal')
-    .classList.remove('show');
+document.addEventListener('DOMContentLoaded', function() {
 
-  document.body.style.overflow='';
+  renderAlbumGallery();
 
-}
-
-
-document
-  .getElementById('categoryModal')
-  .addEventListener('click',(e)=>{
-
-    if(e.target.id==='categoryModal'){
-      closeCategoryGallery();
-    }
-
-  });
-
+});
 </script>
-
 
 <!-- =====================================================
      OPENING VIDEO OVERLAY
