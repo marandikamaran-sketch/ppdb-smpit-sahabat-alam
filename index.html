@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="id">
 <head>
@@ -19,9 +20,13 @@
   --shadow:0 12px 35px rgba(20,92,24,.13)
 }
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box
+}
 
-html{scroll-behavior:smooth}
+html{
+  scroll-behavior:smooth
+}
 
 body{
   margin:0;
@@ -31,9 +36,17 @@ body{
   line-height:1.6
 }
 
+body.no-scroll{
+  overflow:hidden
+}
+
 a{
   text-decoration:none;
   color:inherit
+}
+
+button{
+  font-family:inherit
 }
 
 .wrap{
@@ -41,7 +54,10 @@ a{
   margin:auto
 }
 
-/* NAVBAR */
+/* =========================
+   NAVBAR
+========================= */
+
 .nav{
   position:sticky;
   top:0;
@@ -89,7 +105,10 @@ a{
   color:var(--g2)
 }
 
-/* BUTTON */
+/* =========================
+   BUTTON
+========================= */
+
 .btn{
   display:inline-flex;
   align-items:center;
@@ -103,6 +122,10 @@ a{
   cursor:pointer
 }
 
+.btn:hover{
+  filter:brightness(1.05)
+}
+
 .btn.yellow{
   background:var(--lime);
   color:var(--g)
@@ -113,7 +136,10 @@ a{
   color:var(--g)
 }
 
-/* HERO */
+/* =========================
+   HERO
+========================= */
+
 .hero{
   min-height:650px;
   display:flex;
@@ -157,7 +183,10 @@ a{
   margin-top:24px
 }
 
-/* SECTION */
+/* =========================
+   SECTION
+========================= */
+
 section{
   padding:72px 0
 }
@@ -173,7 +202,10 @@ section{
   color:var(--muted)
 }
 
-/* ABOUT */
+/* =========================
+   ABOUT
+========================= */
+
 .about{
   display:grid;
   grid-template-columns:1fr 1.2fr .75fr;
@@ -207,7 +239,10 @@ section{
   font-weight:800
 }
 
-/* VISI MISI */
+/* =========================
+   VISI MISI
+========================= */
+
 .vision{
   background:linear-gradient(120deg,#104f15,#237e2c);
   color:#fff;
@@ -253,7 +288,10 @@ section{
   flex:none
 }
 
-/* PROGRAM */
+/* =========================
+   PROGRAM
+========================= */
+
 .programs{
   display:grid;
   grid-template-columns:repeat(5,1fr);
@@ -290,7 +328,10 @@ section{
   color:var(--muted)
 }
 
-/* INFO */
+/* =========================
+   INFO
+========================= */
+
 .info{
   display:grid;
   grid-template-columns:1fr 1fr 1.25fr;
@@ -309,7 +350,10 @@ section{
   color:var(--g)
 }
 
-/* STEPS */
+/* =========================
+   STEPS
+========================= */
+
 .steps{
   display:flex;
   gap:8px
@@ -337,7 +381,10 @@ section{
   color:var(--muted)
 }
 
-/* BROSUR */
+/* =========================
+   BROSUR
+========================= */
+
 .brochures{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -364,14 +411,19 @@ section{
   cursor:zoom-in
 }
 
-/* GALLERY */
+/* =========================
+   GALERI UTAMA
+========================= */
+
 .gallery{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:15px
+  gap:15px;
+  min-height:50px
 }
 
 .g{
+  position:relative;
   height:210px;
   border-radius:16px;
   background-size:cover;
@@ -379,52 +431,65 @@ section{
   display:flex;
   align-items:end;
   overflow:hidden;
-  cursor:zoom-in
+  cursor:pointer;
+  border:0;
+  padding:0;
+  outline:none;
+  opacity:1;
+  transform:none;
+  box-shadow:0 5px 18px rgba(20,92,24,.08);
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease
 }
 
 .g span{
-  background:rgba(13,83,22,.82);
+  background:linear-gradient(
+    transparent,
+    rgba(13,83,22,.92)
+  );
   color:#fff;
   width:100%;
-  padding:9px 12px;
+  padding:28px 12px 11px;
   font-weight:700;
-  font-size:13px
+  font-size:13px;
+  text-align:left
 }
 
-.gallery .g{
+.g:hover{
+  transform:translateY(-4px);
+  box-shadow:0 14px 30px rgba(20,92,24,.22)
+}
+
+.g.gallery-hidden{
+  display:none
+}
+
+.gallery-status{
+  grid-column:1/-1;
+  padding:20px;
+  text-align:center;
+  border:1px dashed #cbd8c6;
+  border-radius:15px;
+  color:#708070;
+  background:#f7faf5
+}
+
+/* animasi */
+.gallery .g.reveal{
   opacity:0;
-  transform:translateY(45px) scale(.96);
-  transition:
-    opacity .7s ease,
-    transform .7s cubic-bezier(.22,1,.36,1),
-    box-shadow .2s
+  transform:translateY(35px) scale(.97)
 }
 
-.gallery .g.from-left{
-  transform:translateX(-65px) scale(.96)
-}
-
-.gallery .g.from-right{
-  transform:translateX(65px) scale(.96)
-}
-
-.gallery .g.is-visible{
+.gallery .g.reveal.visible{
   opacity:1;
-  transform:translate(0) scale(1)
+  transform:translateY(0) scale(1)
 }
 
-.gallery .g:nth-child(2),
-.gallery .g:nth-child(4),
-.gallery .g:nth-child(6){
-  transition-delay:.12s
-}
+/* =========================
+   CTA
+========================= */
 
-.gallery .g:hover{
-  box-shadow:0 14px 30px rgba(20,92,24,.22);
-  transform:translateY(-3px) scale(1.01)
-}
-
-/* CTA */
 .cta{
   background:
     linear-gradient(90deg,rgba(8,76,14,.88),rgba(8,76,14,.58)),
@@ -439,7 +504,10 @@ section{
   margin:0 0 10px
 }
 
-/* CONTACT */
+/* =========================
+   CONTACT
+========================= */
+
 .contact{
   display:grid;
   grid-template-columns:1.2fr 1fr 1fr;
@@ -465,7 +533,10 @@ section{
   box-shadow:0 12px 28px rgba(0,0,0,.12)
 }
 
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
+
 .footer{
   background:#0d4b16;
   color:#fff;
@@ -474,7 +545,10 @@ section{
   font-size:13px
 }
 
-/* REVEAL IMAGE */
+/* =========================
+   REVEAL IMAGE
+========================= */
+
 .reveal-img{
   opacity:0;
   transform:translateX(-70px) scale(.97);
@@ -488,24 +562,23 @@ section{
   transform:translateX(70px) scale(.97)
 }
 
-.reveal-img.from-up{
-  transform:translateY(55px) scale(.97)
-}
-
 .reveal-img.is-visible{
   opacity:1;
   transform:translate(0) scale(1)
 }
 
-/* LIGHTBOX */
+/* =========================
+   LIGHTBOX
+========================= */
+
 .modal{
   display:none;
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.8);
-  z-index:100;
+  background:rgba(0,0,0,.82);
+  z-index:100000;
   padding:20px;
-  overflow:auto;
+  overflow:hidden;
   backdrop-filter:blur(4px)
 }
 
@@ -513,22 +586,6 @@ section{
   display:flex;
   align-items:center;
   justify-content:center
-}
-
-.modal img{
-  max-width:min(1000px,95vw);
-  max-height:92vh;
-  object-fit:contain;
-  opacity:0;
-  transform:translateY(35px) scale(.94);
-  transition:
-    opacity .35s ease,
-    transform .45s cubic-bezier(.22,1,.36,1)
-}
-
-.modal.show img{
-  opacity:1;
-  transform:translateY(0) scale(1)
 }
 
 .lightbox-content{
@@ -543,11 +600,13 @@ section{
 }
 
 .lightbox-content img{
+  display:block;
   max-width:min(1100px,86vw);
   max-height:78vh;
   border-radius:10px;
   box-shadow:0 20px 60px rgba(0,0,0,.45);
-  background:#fff
+  background:#fff;
+  object-fit:contain
 }
 
 .lightbox-content img.lightbox-change{
@@ -578,14 +637,14 @@ section{
   height:44px;
   font-size:24px;
   cursor:pointer;
-  z-index:102
+  z-index:100002
 }
 
 .slide-btn{
   position:fixed;
   top:50%;
   transform:translateY(-50%);
-  z-index:102;
+  z-index:100002;
   width:56px;
   height:56px;
   border:0;
@@ -606,8 +665,13 @@ section{
   transform:translateY(-50%) scale(1.08)
 }
 
-.slide-btn.prev{left:24px}
-.slide-btn.next{right:24px}
+.slide-btn.prev{
+  left:24px
+}
+
+.slide-btn.next{
+  right:24px
+}
 
 @keyframes lightboxIn{
   from{
@@ -620,13 +684,16 @@ section{
   }
 }
 
-/* CATEGORY MODAL */
+/* =========================
+   CATEGORY MODAL
+========================= */
+
 .category-modal{
   display:none;
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.85);
-  z-index:100000;
+  z-index:100001;
   align-items:center;
   justify-content:center;
   padding:20px
@@ -673,7 +740,10 @@ section{
   cursor:pointer
 }
 
-/* VIDEO UTAMA */
+/* =========================
+   VIDEO AYO DAFTAR
+========================= */
+
 .ayo-daftar-video{
   padding:18px 0 30px;
   text-align:center
@@ -703,7 +773,10 @@ section{
   background:#111
 }
 
-/* PROGRAM GALLERY */
+/* =========================
+   PROGRAM GALLERY
+========================= */
+
 .program-gallery{
   margin-top:16px;
   display:grid;
@@ -753,10 +826,6 @@ section{
   line-height:1.25
 }
 
-.program-gallery-item:nth-child(n+3){
-  display:none
-}
-
 .show-all-gallery{
   grid-column:1/-1;
   margin-top:8px;
@@ -773,7 +842,10 @@ section{
   background:#21852a
 }
 
-/* EARLY BIRD */
+/* =========================
+   EARLY BIRD
+========================= */
+
 .early-bird-note{
   margin:14px 0 0;
   padding:10px 8px 2px;
@@ -796,9 +868,9 @@ section{
   line-height:1.35
 }
 
-/* =====================================================
-   OPENING OVERLAY VIDEO
-   ===================================================== */
+/* =========================
+   OPENING OVERLAY JPG
+========================= */
 
 .pmb-opening-overlay{
   position:fixed;
@@ -808,14 +880,17 @@ section{
   align-items:center;
   justify-content:center;
   padding:20px;
-  box-sizing:border-box;
-  background:rgba(0,0,0,.72);
+  background:rgba(0,0,0,.62);
   backdrop-filter:blur(4px);
   -webkit-backdrop-filter:blur(4px);
+
   opacity:0;
   visibility:hidden;
   pointer-events:none;
-  transition:opacity .35s ease,visibility .35s ease
+
+  transition:
+    opacity .35s ease,
+    visibility .35s ease
 }
 
 .pmb-opening-overlay.show{
@@ -824,49 +899,55 @@ section{
   pointer-events:auto
 }
 
-.opening-video-wrap{
+.pmb-opening-image{
+  display:block;
   width:min(92vw,900px);
-  max-height:90vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  transform:scale(.18);
-  opacity:.18;
+  max-height:88vh;
+  object-fit:contain;
+
+  border-radius:18px;
+
+  box-shadow:
+    0 18px 60px rgba(0,0,0,.5);
+
+  cursor:pointer;
+
+  transform:scale(.22);
+  opacity:.12;
+
   transition:
     transform .65s cubic-bezier(.2,.85,.25,1),
     opacity .65s ease
 }
 
-.pmb-opening-overlay.show .opening-video-wrap{
+.pmb-opening-overlay.show .pmb-opening-image{
   transform:scale(1);
   opacity:1
-}
-
-.pmb-opening-video{
-  display:block;
-  width:100%;
-  max-width:900px;
-  max-height:85vh;
-  object-fit:contain;
-  border-radius:18px;
-  background:#000;
-  box-shadow:0 18px 60px rgba(0,0,0,.5)
 }
 
 .pmb-opening-close{
   position:absolute;
   top:18px;
   right:22px;
+
   width:44px;
   height:44px;
+
   border:0;
   border-radius:50%;
-  background:rgba(0,0,0,.65);
+
+  background:rgba(0,0,0,.68);
   color:#fff;
+
   font-size:32px;
   line-height:1;
+
   cursor:pointer;
   z-index:2
+}
+
+.pmb-opening-close:hover{
+  background:#145c18
 }
 
 .pmb-opening-hint{
@@ -874,72 +955,25 @@ section{
   bottom:18px;
   left:50%;
   transform:translateX(-50%);
+
   color:#fff;
   font-size:14px;
+
   background:rgba(0,0,0,.48);
+
   padding:8px 14px;
   border-radius:999px
 }
 
-.pmb-opening-overlay.closing .opening-video-wrap{
-  transform:scale(.18);
+.pmb-opening-overlay.closing .pmb-opening-image{
+  transform:scale(.22);
   opacity:.05
 }
 
-/* VIDEO GALLERY */
-.gallery-video-card{
-  cursor:pointer;
-  position:relative;
-  overflow:hidden
-}
+/* =========================
+   RESPONSIVE
+========================= */
 
-.gallery-video-card .gallery-media{
-  position:relative;
-  width:100%;
-  height:100%;
-  min-height:220px;
-  overflow:hidden
-}
-
-.gallery-video-card video{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:cover
-}
-
-.gallery-play{
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  width:64px;
-  height:64px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(0,80,35,.82);
-  color:#fff;
-  font-size:27px;
-  padding-left:4px;
-  box-sizing:border-box;
-  box-shadow:0 8px 25px rgba(0,0,0,.28)
-}
-
-.gallery-video-card .gallery-overlay{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  padding:14px 16px;
-  background:linear-gradient(transparent,rgba(0,70,30,.92));
-  color:#fff;
-  font-weight:700;
-  font-size:16px
-}
-
-/* RESPONSIVE */
 @media(max-width:950px){
 
   .links{
@@ -1003,13 +1037,9 @@ section{
     padding:12px
   }
 
-  .opening-video-wrap{
-    width:96vw
-  }
-
-  .pmb-opening-video{
-    max-width:96vw;
-    max-height:80vh;
+  .pmb-opening-image{
+    width:96vw;
+    max-height:82vh;
     border-radius:14px
   }
 
@@ -1064,20 +1094,31 @@ section{
   section{
     padding:52px 0
   }
+
+  .vision{
+    padding:28px
+  }
+
+  .vision h2{
+    font-size:30px
+  }
+
+  .vision blockquote{
+    font-size:21px
+  }
 }
 
 @media(prefers-reduced-motion:reduce){
 
   .reveal-img,
   .gallery .g,
-  .modal img,
   .pmb-opening-overlay,
-  .opening-video-wrap{
+  .pmb-opening-image{
     transition:none!important
   }
 
   .reveal-img,
-  .gallery .g{
+  .gallery .g.reveal{
     opacity:1;
     transform:none!important
   }
@@ -1088,39 +1129,37 @@ section{
 <body>
 
 <!-- =====================================================
-     OPENING OVERLAY VIDEO
-     ===================================================== -->
+     OPENING OVERLAY JPG
+     File: assets/bidik.jpeg
+===================================================== -->
 
 <div id="pmbOpeningOverlay"
      class="pmb-opening-overlay"
      aria-label="Informasi Penerimaan Murid Baru">
 
-  <button class="pmb-opening-close"
-          type="button"
-          aria-label="Tutup">×</button>
+  <button
+    class="pmb-opening-close"
+    type="button"
+    aria-label="Tutup">
+    ×
+  </button>
 
-  <div class="opening-video-wrap">
-
-    <video id="openingVideo"
-           class="pmb-opening-video"
-           src="assets/inggris_web.mp4"
-           autoplay
-           muted
-           playsinline
-           controls>
-      Browser Anda tidak mendukung pemutaran video.
-    </video>
-
-  </div>
+  <img
+    id="openingImage"
+    class="pmb-opening-image"
+    src="assets/bidik.jpeg"
+    alt="SPMB SMPIT Sahabat Alam">
 
   <div class="pmb-opening-hint">
-    Klik × untuk menutup
+    Klik gambar atau × untuk menutup
   </div>
 
 </div>
 
 
-<!-- NAVBAR -->
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
 
 <nav class="nav">
 
@@ -1128,8 +1167,9 @@ section{
 
     <a class="brand" href="#top">
 
-      <img src="assets/logo.jpg"
-           alt="Logo SMPIT Sahabat Alam">
+      <img
+        src="assets/logo.jpg"
+        alt="Logo SMPIT Sahabat Alam">
 
       <span>
         SMPIT SAHABAT ALAM
@@ -1139,17 +1179,20 @@ section{
     </a>
 
     <div class="links">
+
       <a href="#profil">Profil</a>
       <a href="#program">Program</a>
       <a href="#ppdb">SPMB</a>
       <a href="#galeri">Galeri</a>
       <a href="#kontak">Kontak</a>
+
     </div>
 
-    <a class="btn"
-       href="https://docs.google.com/forms/d/e/1FAIpQLSeKm7PjzB_geLYGV5dZh46S_fk9a0i_iqro5hWJO1VMMEUmCQ/viewform"
-       target="_blank"
-       rel="noopener">
+    <a
+      class="btn"
+      href="https://docs.google.com/forms/d/e/1FAIpQLSeKm7PjzB_geLYGV5dZh46S_fk9a0i_iqro5hWJO1VMMEUmCQ/viewform"
+      target="_blank"
+      rel="noopener">
       Daftar Sekarang
     </a>
 
@@ -1158,7 +1201,9 @@ section{
 </nav>
 
 
-<!-- HERO -->
+<!-- =====================================================
+     HERO
+===================================================== -->
 
 <header id="top" class="hero">
 
@@ -1181,10 +1226,11 @@ section{
 
       <div class="actions">
 
-        <a class="btn yellow"
-           href="https://docs.google.com/forms/d/e/1FAIpQLSeKm7PjzB_geLYGV5dZh46S_fk9a0i_iqro5hWJO1VMMEUmCQ/viewform"
-           target="_blank"
-           rel="noopener">
+        <a
+          class="btn yellow"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSeKm7PjzB_geLYGV5dZh46S_fk9a0i_iqro5hWJO1VMMEUmCQ/viewform"
+          target="_blank"
+          rel="noopener">
           Daftar Sekarang →
         </a>
 
@@ -1201,7 +1247,9 @@ section{
 </header>
 
 
-<!-- VIDEO AYO SEGERA DAFTAR -->
+<!-- =====================================================
+     VIDEO AYO SEGERA DAFTAR
+===================================================== -->
 
 <section class="ayo-daftar-video">
 
@@ -1209,12 +1257,14 @@ section{
 
   <div class="ayo-video-card">
 
-    <video controls
-           playsinline
-           preload="metadata">
+    <video
+      controls
+      playsinline
+      preload="metadata">
 
-      <source src="assets/video-kegiatan-sahabat-alam.mp4"
-              type="video/mp4">
+      <source
+        src="assets/video-kegiatan-sahabat-alam.mp4"
+        type="video/mp4">
 
       Browser Anda tidak mendukung pemutaran video.
 
@@ -1225,16 +1275,20 @@ section{
 </section>
 
 
-<!-- PROFIL -->
+<!-- =====================================================
+     PROFIL
+===================================================== -->
 
 <section id="profil">
 
   <div class="wrap about">
 
-    <div class="photo reveal-img from-left">
+    <div class="photo reveal-img">
 
-      <img src="assets/Deskripsi.jpeg"
-           alt="Profil SMPIT Sahabat Alam">
+      <img
+        src="assets/Deskripsi.jpeg"
+        alt="Profil SMPIT Sahabat Alam"
+        loading="lazy">
 
     </div>
 
@@ -1263,7 +1317,9 @@ section{
 </section>
 
 
-<!-- VISI MISI -->
+<!-- =====================================================
+     VISI MISI
+===================================================== -->
 
 <section>
 
@@ -1354,7 +1410,9 @@ section{
 </section>
 
 
-<!-- PROGRAM -->
+<!-- =====================================================
+     PROGRAM
+===================================================== -->
 
 <section id="program">
 
@@ -1370,10 +1428,9 @@ section{
 
     <div class="programs">
 
-      <!-- QURAN -->
-
-      <div class="card program-card"
-           data-program="quran">
+      <div
+        class="card program-card"
+        data-program="quran">
 
         <div class="icon">📖</div>
 
@@ -1385,8 +1442,9 @@ section{
           Tilawah, murojaah, tahfidz, sholat dhuha, pembiasaan infak dan sedekah, serta akhlak Islami.
         </p>
 
-        <div class="program-gallery"
-             data-gallery-program="quran">
+        <div
+          class="program-gallery"
+          data-gallery-program="quran">
 
           <div class="program-gallery-empty">
             Belum ada dokumentasi
@@ -1397,10 +1455,9 @@ section{
       </div>
 
 
-      <!-- INCLUSION -->
-
-      <div class="card program-card"
-           data-program="inclusion">
+      <div
+        class="card program-card"
+        data-program="inclusion">
 
         <div class="icon">🤝</div>
 
@@ -1412,8 +1469,9 @@ section{
           Kondisi sarana full day & boarding, bimbingan minat dan bakat, bimbingan keagamaan dan ekstrakulikuler.
         </p>
 
-        <div class="program-gallery"
-             data-gallery-program="inclusion">
+        <div
+          class="program-gallery"
+          data-gallery-program="inclusion">
 
           <div class="program-gallery-empty">
             Belum ada dokumentasi
@@ -1424,10 +1482,9 @@ section{
       </div>
 
 
-      <!-- LANGUAGE -->
-
-      <div class="card program-card"
-           data-program="language">
+      <div
+        class="card program-card"
+        data-program="language">
 
         <div class="icon">ع</div>
 
@@ -1439,8 +1496,9 @@ section{
           English conversation, daily vocabulary, muhadasah dan mufradat yaumiyyah.
         </p>
 
-        <div class="program-gallery"
-             data-gallery-program="language">
+        <div
+          class="program-gallery"
+          data-gallery-program="language">
 
           <div class="program-gallery-empty">
             Belum ada dokumentasi
@@ -1451,10 +1509,9 @@ section{
       </div>
 
 
-      <!-- LEADERSHIP -->
-
-      <div class="card program-card"
-           data-program="leadership">
+      <div
+        class="card program-card"
+        data-program="leadership">
 
         <div class="icon">🚀</div>
 
@@ -1466,8 +1523,9 @@ section{
           Leader training, student organization, Pramuka, achievement days dan kegiatan kewirausahaan.
         </p>
 
-        <div class="program-gallery"
-             data-gallery-program="leadership">
+        <div
+          class="program-gallery"
+          data-gallery-program="leadership">
 
           <div class="program-gallery-empty">
             Belum ada dokumentasi
@@ -1478,10 +1536,9 @@ section{
       </div>
 
 
-      <!-- ENVIRONMENT -->
-
-      <div class="card program-card"
-           data-program="environment">
+      <div
+        class="card program-card"
+        data-program="environment">
 
         <div class="icon">🌱</div>
 
@@ -1493,8 +1550,9 @@ section{
           Daur ulang sampah, kebun hidroponik, tanaman obat, pupuk kompos dan bank sampah.
         </p>
 
-        <div class="program-gallery"
-             data-gallery-program="environment">
+        <div
+          class="program-gallery"
+          data-gallery-program="environment">
 
           <div class="program-gallery-empty">
             Belum ada dokumentasi
@@ -1511,7 +1569,9 @@ section{
 </section>
 
 
-<!-- INFORMASI SPMB -->
+<!-- =====================================================
+     INFORMASI SPMB
+===================================================== -->
 
 <section id="ppdb">
 
@@ -1522,8 +1582,6 @@ section{
     </h2>
 
     <div class="info">
-
-      <!-- PENDAFTARAN -->
 
       <div class="panel">
 
@@ -1545,10 +1603,11 @@ section{
           Rp250.000,-
         </div>
 
-        <a class="btn"
-           href="https://docs.google.com/forms/d/e/1FAIpQLSeKm7PjzB_geLYGV5dZh46S_fk9a0i_iqro5hWJO1VMMEUmCQ/viewform"
-           target="_blank"
-           rel="noopener">
+        <a
+          class="btn"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSeKm7PjzB_geLYGV5dZh46S_fk9a0i_iqro5hWJO1VMMEUmCQ/viewform"
+          target="_blank"
+          rel="noopener">
           Daftar Sekarang →
         </a>
 
@@ -1566,8 +1625,6 @@ section{
 
       </div>
 
-
-      <!-- SYARAT -->
 
       <div class="panel">
 
@@ -1588,8 +1645,6 @@ section{
 
       </div>
 
-
-      <!-- ALUR -->
 
       <div class="panel">
 
@@ -1640,7 +1695,9 @@ section{
 </section>
 
 
-<!-- BROSUR -->
+<!-- =====================================================
+     BROSUR
+===================================================== -->
 
 <section id="brosur">
 
@@ -1658,10 +1715,12 @@ section{
 
       <div class="brochure">
 
-        <img class="reveal-img from-left"
-             src="assets/brosur1.jpg"
-             alt="Brosur SPMB 1"
-             onclick="openCategoryGallery('Brosur SPMB',['assets/brosur1.jpg'])">
+        <img
+          class="reveal-img"
+          src="assets/brosur1.jpg"
+          alt="Brosur SPMB 1"
+          loading="lazy"
+          onclick="openCategoryGallery('Brosur SPMB',['assets/brosur1.jpg'])">
 
         <div>
 
@@ -1673,8 +1732,10 @@ section{
             Profil, visi-misi, program unggulan, kegiatan dan informasi sekolah.
           </p>
 
-          <button class="btn"
-                  onclick="openCategoryGallery('Brosur SPMB',['assets/brosur1.jpg'])">
+          <button
+            class="btn"
+            type="button"
+            onclick="openCategoryGallery('Brosur SPMB',['assets/brosur1.jpg'])">
             Lihat Brosur →
           </button>
 
@@ -1685,10 +1746,12 @@ section{
 
       <div class="brochure">
 
-        <img class="reveal-img from-right"
-             src="assets/brosur2.jpg"
-             alt="Brosur SPMB 2"
-             onclick="openCategoryGallery('Brosur SPMB',['assets/brosur2.jpg'])">
+        <img
+          class="reveal-img"
+          src="assets/brosur2.jpg"
+          alt="Brosur SPMB 2"
+          loading="lazy"
+          onclick="openCategoryGallery('Brosur SPMB',['assets/brosur2.jpg'])">
 
         <div>
 
@@ -1700,8 +1763,10 @@ section{
             Waktu pendaftaran, syarat, kegiatan harian, ekstrakurikuler dan kontak.
           </p>
 
-          <button class="btn"
-                  onclick="openCategoryGallery('Brosur SPMB',['assets/brosur2.jpg'])">
+          <button
+            class="btn"
+            type="button"
+            onclick="openCategoryGallery('Brosur SPMB',['assets/brosur2.jpg'])">
             Lihat Brosur →
           </button>
 
@@ -1716,7 +1781,9 @@ section{
 </section>
 
 
-<!-- GALERI -->
+<!-- =====================================================
+     GALERI SEKOLAH
+===================================================== -->
 
 <section id="galeri">
 
@@ -1726,8 +1793,18 @@ section{
       Aktivitas & Lingkungan Sekolah
     </h2>
 
-    <div class="gallery"
-         id="albumGallery">
+    <p class="lead">
+      Klik salah satu album untuk melihat dokumentasi kegiatan sekolah.
+    </p>
+
+    <div
+      class="gallery"
+      id="albumGallery">
+
+      <div class="gallery-status">
+        Memuat galeri...
+      </div>
+
     </div>
 
   </div>
@@ -1735,7 +1812,9 @@ section{
 </section>
 
 
-<!-- CTA -->
+<!-- =====================================================
+     CTA
+===================================================== -->
 
 <section class="cta">
 
@@ -1749,10 +1828,11 @@ section{
       Mari tumbuh menjadi generasi yang cerdas, sholeh, kreatif dan mandiri.
     </p>
 
-    <a class="btn yellow"
-       href="https://docs.google.com/forms/d/e/1FAIpQLSeKm7PjzB_geLYGV5dZh46S_fk9a0i_iqro5hWJO1VMMEUmCQ/viewform"
-       target="_blank"
-       rel="noopener">
+    <a
+      class="btn yellow"
+      href="https://docs.google.com/forms/d/e/1FAIpQLSeKm7PjzB_geLYGV5dZh46S_fk9a0i_iqro5hWJO1VMMEUmCQ/viewform"
+      target="_blank"
+      rel="noopener">
       Daftar Sekarang →
     </a>
 
@@ -1761,7 +1841,9 @@ section{
 </section>
 
 
-<!-- KONTAK -->
+<!-- =====================================================
+     KONTAK
+===================================================== -->
 
 <section id="kontak">
 
@@ -1793,36 +1875,46 @@ section{
       <p>
         Ummi Lelawati<br>
 
-        <a href="https://wa.me/6285795395208"
-           target="_blank"
-           rel="noopener">
+        <a
+          href="https://wa.me/6285795395208"
+          target="_blank"
+          rel="noopener">
+
           <b>0857-9539-5208</b>
+
         </a>
+
       </p>
 
       <p>
         Ustadz Kelana<br>
 
-        <a href="https://wa.me/6281220959173"
-           target="_blank"
-           rel="noopener">
+        <a
+          href="https://wa.me/6281220959173"
+          target="_blank"
+          rel="noopener">
+
           <b>0812-2095-9173</b>
+
         </a>
+
       </p>
 
       <div class="actions">
 
-        <a class="btn"
-           href="https://wa.me/6285795395208"
-           target="_blank"
-           rel="noopener">
+        <a
+          class="btn"
+          href="https://wa.me/6285795395208"
+          target="_blank"
+          rel="noopener">
           WhatsApp Ummi Lelawati
         </a>
 
-        <a class="btn"
-           href="https://wa.me/6281220959173"
-           target="_blank"
-           rel="noopener">
+        <a
+          class="btn"
+          href="https://wa.me/6281220959173"
+          target="_blank"
+          rel="noopener">
           WhatsApp Ustadz Kelana
         </a>
 
@@ -1831,11 +1923,12 @@ section{
     </div>
 
 
-    <a class="map"
-       href="https://www.google.com/maps/search/?api=1&query=SMPIT+Sahabat+Alam%2C+Jl.+Jendral+Sudirman%2C+RT+04%2F15%2C+Desa+Citepus%2C+Kec.+Palabuhanratu%2C+Kab.+Sukabumi"
-       target="_blank"
-       rel="noopener"
-       aria-label="Buka lokasi SMPIT Sahabat Alam di Google Maps">
+    <a
+      class="map"
+      href="https://www.google.com/maps/search/?api=1&query=SMPIT+Sahabat+Alam%2C+Jl.+Jendral+Sudirman%2C+RT+04%2F15%2C+Desa+Citepus%2C+Kec.+Palabuhanratu%2C+Kab.+Sukabumi"
+      target="_blank"
+      rel="noopener"
+      aria-label="Buka lokasi SMPIT Sahabat Alam di Google Maps">
 
       <div>
 
@@ -1862,22 +1955,29 @@ section{
 </section>
 
 
-<!-- FOOTER -->
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <div class="footer">
   © 2026 SMPIT Sahabat Alam "Sekolah Tepat Untuk Generasi Hebat"
 </div>
 
 
-<!-- CATEGORY MODAL -->
+<!-- =====================================================
+     CATEGORY MODAL
+===================================================== -->
 
-<div class="category-modal"
-     id="categoryModal">
+<div
+  class="category-modal"
+  id="categoryModal">
 
   <div class="category-modal-box">
 
-    <button class="category-close"
-            onclick="closeCategoryGallery()">
+    <button
+      class="category-close"
+      type="button"
+      onclick="closeCategoryGallery()">
       ×
     </button>
 
@@ -1890,42 +1990,56 @@ section{
 </div>
 
 
-<!-- LIGHTBOX -->
+<!-- =====================================================
+     LIGHTBOX GALERI
+===================================================== -->
 
-<div class="modal"
-     id="modal"
-     onclick="closeImg()">
+<div
+  class="modal"
+  id="modal">
 
-  <button class="close"
-          onclick="closeImg()"
-          aria-label="Tutup">
+  <button
+    class="close"
+    type="button"
+    onclick="closeImg()"
+    aria-label="Tutup">
     ×
   </button>
 
-  <button class="slide-btn prev"
-          onclick="event.stopPropagation();prevImg()"
-          aria-label="Gambar sebelumnya">
+  <button
+    class="slide-btn prev"
+    type="button"
+    onclick="event.stopPropagation();prevImg()"
+    aria-label="Gambar sebelumnya">
     ‹
   </button>
 
-  <div class="lightbox-content"
-       onclick="event.stopPropagation()">
+  <div
+    class="lightbox-content"
+    onclick="event.stopPropagation()">
 
-    <img id="modalImg"
-         src=""
-         alt="Gambar SMPIT Sahabat Alam">
+    <img
+      id="modalImg"
+      src=""
+      alt="Gambar SMPIT Sahabat Alam">
 
-    <div class="lightbox-caption"
-         id="modalCaption"></div>
+    <div
+      class="lightbox-caption"
+      id="modalCaption">
+    </div>
 
-    <div class="lightbox-counter"
-         id="modalCounter"></div>
+    <div
+      class="lightbox-counter"
+      id="modalCounter">
+    </div>
 
   </div>
 
-  <button class="slide-btn next"
-          onclick="event.stopPropagation();nextImg()"
-          aria-label="Gambar berikutnya">
+  <button
+    class="slide-btn next"
+    type="button"
+    onclick="event.stopPropagation();nextImg()"
+    aria-label="Gambar berikutnya">
     ›
   </button>
 
@@ -1933,184 +2047,275 @@ section{
 
 
 <!-- =====================================================
-     JAVASCRIPT GALERI UTAMA
-     ===================================================== -->
+     JAVASCRIPT UTAMA
+===================================================== -->
 
 <script>
 
+/* =====================================================
+   DATA GALERI UTAMA
+===================================================== */
+
 const galleryAlbums = [
+
   {
-    title: 'Aktivitas Pembelajaran',
-    cover: 'assets/pembelajaran1.jpeg',
-    images: [
+    title:'Aktivitas Pembelajaran',
+    cover:'assets/pembelajaran1.jpeg',
+    images:[
       'assets/pembelajaran1.jpeg',
       'assets/pembelajaran2.jpeg'
     ]
   },
+
   {
-    title: 'Lingkungan Sekolah',
-    cover: 'assets/lingkungan1.jpeg',
-    images: [
+    title:'Lingkungan Sekolah',
+    cover:'assets/lingkungan1.jpeg',
+    images:[
       'assets/lingkungan1.jpeg',
       'assets/lingkungan2.jpeg',
       'assets/lingkungan3.jpeg'
     ]
   },
+
   {
-    title: 'Kegiatan Sholat Berjamaah',
-    cover: 'assets/salat.jpeg',
-    images: [
+    title:'Kegiatan Sholat Berjamaah',
+    cover:'assets/salat.jpeg',
+    images:[
       'assets/salat.jpeg'
     ]
   },
+
   {
-    title: 'Kegiatan Hafalan Hadist Arbain',
-    cover: 'assets/kegiatan-koridor.jpg',
-    images: [
+    title:'Kegiatan Hafalan Hadist Arbain',
+    cover:'assets/kegiatan-koridor.jpg',
+    images:[
       'assets/kegiatan-koridor.jpg'
     ]
   }
+
 ];
 
-let currentAlbumImages = [];
-let currentImg = 0;
 
-/* ===============================
-   TAMPILKAN KARTU GALERI
-================================ */
+/* =====================================================
+   STATE LIGHTBOX
+===================================================== */
 
-function renderAlbumGallery() {
+let currentAlbumImages=[];
+let currentImg=0;
 
-  const box = document.getElementById('albumGallery');
+let programMode=false;
+let programLightboxItems=[];
+let programCurrent=0;
 
-  if (!box) {
-    console.error('albumGallery tidak ditemukan');
+
+/* =====================================================
+   RENDER GALERI UTAMA
+===================================================== */
+
+function renderAlbumGallery(){
+
+  const box=document.getElementById('albumGallery');
+
+  if(!box){
     return;
   }
 
-  box.innerHTML = galleryAlbums.map((album, index) => {
+  if(!Array.isArray(galleryAlbums) || !galleryAlbums.length){
+
+    box.innerHTML=`
+      <div class="gallery-status">
+        Galeri belum tersedia.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  box.innerHTML=galleryAlbums.map((album,index)=>{
+
+    const safeTitle=
+      String(album.title)
+        .replace(/"/g,'&quot;')
+        .replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;');
 
     return `
-      <div
-        class="g album-card"
+
+      <button
+        type="button"
+        class="g album-card reveal"
         style="background-image:url('${album.cover}')"
-        onclick="openAlbum(${index})"
-        role="button"
-        tabindex="0"
-        aria-label="${album.title}"
-      >
-        <span>${album.title}</span>
-      </div>
+        data-album-index="${index}"
+        aria-label="Buka ${safeTitle}">
+
+        <span>
+          ${safeTitle}
+        </span>
+
+      </button>
+
     `;
 
   }).join('');
 
-  /* Animasi */
-  document.querySelectorAll('#albumGallery .g').forEach((el, index) => {
 
-    if (index % 2 === 0) {
-      el.classList.add('from-left');
-    } else {
-      el.classList.add('from-right');
-    }
+  /* event klik */
 
-    el.addEventListener('keydown', function(e) {
+  box
+    .querySelectorAll('.album-card')
+    .forEach((card)=>{
 
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
+      const index=
+        Number(card.dataset.albumIndex);
+
+      card.addEventListener('click',()=>{
         openAlbum(index);
-      }
+      });
+
+      card.addEventListener('keydown',(e)=>{
+
+        if(e.key==='Enter' || e.key===' '){
+
+          e.preventDefault();
+
+          openAlbum(index);
+
+        }
+
+      });
 
     });
 
-  });
 
-  /* Observer animasi */
-  const observer = new IntersectionObserver((entries) => {
+  /* animasi */
 
-    entries.forEach(entry => {
+  const cards=
+    box.querySelectorAll('.g');
 
-      if (entry.isIntersecting) {
+  if('IntersectionObserver' in window){
 
-        entry.target.classList.add('is-visible');
+    const observer=
+      new IntersectionObserver(
+        entries=>{
 
-        observer.unobserve(entry.target);
+          entries.forEach(entry=>{
 
-      }
+            if(entry.isIntersecting){
 
+              entry.target.classList.add('visible');
+
+              observer.unobserve(entry.target);
+
+            }
+
+          });
+
+        },
+        {
+          threshold:.08
+        }
+      );
+
+    cards.forEach(card=>{
+      observer.observe(card);
     });
 
-  }, {
-    threshold: 0.1
-  });
+  }else{
 
-  document
-    .querySelectorAll('#albumGallery .g')
-    .forEach(el => observer.observe(el));
+    cards.forEach(card=>{
+      card.classList.add('visible');
+    });
+
+  }
 
 }
 
 
-/* ===============================
+/* =====================================================
    BUKA ALBUM
-================================ */
+===================================================== */
 
-function openAlbum(index) {
+function openAlbum(index){
 
-  const album = galleryAlbums[index];
+  const album=
+    galleryAlbums[index];
 
-  if (!album) return;
+  if(!album){
+    return;
+  }
 
-  currentAlbumImages = album.images.map(src => ({
-    src: src,
-    title: album.title
-  }));
+  programMode=false;
+  programLightboxItems=[];
 
-  currentImg = 0;
+  currentAlbumImages=
+    album.images.map(src=>({
 
-  const modal = document.getElementById('modal');
+      src:src,
+      title:album.title
 
-  if (!modal) return;
+    }));
+
+  currentImg=0;
+
+  const modal=
+    document.getElementById('modal');
+
+  if(!modal){
+    return;
+  }
 
   modal.classList.add('show');
 
-  document.body.style.overflow = 'hidden';
+  document.body.classList.add('no-scroll');
 
   showAlbumImage();
 
 }
 
 
-/* ===============================
-   TAMPILKAN FOTO
-================================ */
+/* =====================================================
+   TAMPILKAN FOTO ALBUM
+===================================================== */
 
-function showAlbumImage() {
+function showAlbumImage(){
 
-  if (!currentAlbumImages.length) return;
+  if(!currentAlbumImages.length){
+    return;
+  }
 
-  const item = currentAlbumImages[currentImg];
+  const item=
+    currentAlbumImages[currentImg];
 
-  const img = document.getElementById('modalImg');
-  const caption = document.getElementById('modalCaption');
-  const counter = document.getElementById('modalCounter');
+  const img=
+    document.getElementById('modalImg');
 
-  if (!img) return;
+  const caption=
+    document.getElementById('modalCaption');
+
+  const counter=
+    document.getElementById('modalCounter');
+
+  if(!img){
+    return;
+  }
 
   img.classList.remove('lightbox-change');
 
   void img.offsetWidth;
 
-  img.src = item.src;
-  img.alt = item.title;
+  img.src=item.src;
+  img.alt=item.title;
 
-  if (caption) {
-    caption.textContent = item.title;
+  if(caption){
+    caption.textContent=item.title;
   }
 
-  if (counter) {
-    counter.textContent =
-      `${currentImg + 1} / ${currentAlbumImages.length}`;
+  if(counter){
+
+    counter.textContent=
+      `${currentImg+1} / ${currentAlbumImages.length}`;
+
   }
 
   img.classList.add('lightbox-change');
@@ -2118,309 +2323,287 @@ function showAlbumImage() {
 }
 
 
-/* ===============================
-   FOTO BERIKUTNYA
-================================ */
+/* =====================================================
+   NEXT
+===================================================== */
 
-function nextImg() {
+function nextImg(){
 
-  if (!currentAlbumImages.length) return;
+  if(programMode && programLightboxItems.length){
 
-  currentImg =
-    (currentImg + 1) % currentAlbumImages.length;
+    nextProgram();
 
-  showAlbumImage();
-
-}
-
-
-/* ===============================
-   FOTO SEBELUMNYA
-================================ */
-
-function prevImg() {
-
-  if (!currentAlbumImages.length) return;
-
-  currentImg =
-    (currentImg - 1 + currentAlbumImages.length)
-    % currentAlbumImages.length;
-
-  showAlbumImage();
-
-}
-
-
-/* ===============================
-   TUTUP GALERI
-================================ */
-
-function closeImg() {
-
-  const modal = document.getElementById('modal');
-
-  if (!modal) return;
-
-  modal.classList.remove('show');
-
-  document.body.style.overflow = '';
-
-}
-
-
-/* ===============================
-   KEYBOARD
-================================ */
-
-document.addEventListener('keydown', function(e) {
-
-  const modal = document.getElementById('modal');
-
-  if (!modal || !modal.classList.contains('show')) {
     return;
   }
 
-  if (e.key === 'Escape') {
+  if(!currentAlbumImages.length){
+    return;
+  }
+
+  currentImg=
+    (currentImg+1)%
+    currentAlbumImages.length;
+
+  showAlbumImage();
+
+}
+
+
+/* =====================================================
+   PREV
+===================================================== */
+
+function prevImg(){
+
+  if(programMode && programLightboxItems.length){
+
+    prevProgram();
+
+    return;
+  }
+
+  if(!currentAlbumImages.length){
+    return;
+  }
+
+  currentImg=
+    (
+      currentImg-1+
+      currentAlbumImages.length
+    )%
+    currentAlbumImages.length;
+
+  showAlbumImage();
+
+}
+
+
+/* =====================================================
+   CLOSE LIGHTBOX
+===================================================== */
+
+function closeImg(){
+
+  const modal=
+    document.getElementById('modal');
+
+  if(!modal){
+    return;
+  }
+
+  modal.classList.remove('show');
+
+  document.body.classList.remove('no-scroll');
+
+  programMode=false;
+  programLightboxItems=[];
+  programCurrent=0;
+
+}
+
+
+/* =====================================================
+   KLIK AREA GELAP
+===================================================== */
+
+document
+  .getElementById('modal')
+  ?.addEventListener('click',(e)=>{
+
+    if(e.target.id==='modal'){
+      closeImg();
+    }
+
+  });
+
+
+/* =====================================================
+   KEYBOARD GALERI
+===================================================== */
+
+document.addEventListener('keydown',(e)=>{
+
+  const modal=
+    document.getElementById('modal');
+
+  if(
+    !modal ||
+    !modal.classList.contains('show')
+  ){
+    return;
+  }
+
+  if(e.key==='Escape'){
     closeImg();
   }
 
-  if (e.key === 'ArrowRight') {
+  if(e.key==='ArrowRight'){
     nextImg();
   }
 
-  if (e.key === 'ArrowLeft') {
+  if(e.key==='ArrowLeft'){
     prevImg();
   }
 
 });
 
 
-/* ===============================
+/* =====================================================
    SWIPE HP
-================================ */
+===================================================== */
 
-let touchStartX = 0;
+let touchStartX=0;
 
-const galleryModal = document.getElementById('modal');
+const galleryModal=
+  document.getElementById('modal');
 
-if (galleryModal) {
+if(galleryModal){
 
   galleryModal.addEventListener(
     'touchstart',
-    function(e) {
+    e=>{
 
-      touchStartX =
-        e.changedTouches[0].screenX;
+      if(e.changedTouches.length){
+
+        touchStartX=
+          e.changedTouches[0].screenX;
+
+      }
 
     },
-    { passive: true }
+    {passive:true}
   );
+
 
   galleryModal.addEventListener(
     'touchend',
-    function(e) {
+    e=>{
 
-      const touchEndX =
+      if(!touchStartX){
+        return;
+      }
+
+      const touchEndX=
         e.changedTouches[0].screenX;
 
-      const dx =
-        touchEndX - touchStartX;
+      const dx=
+        touchEndX-touchStartX;
 
-      if (Math.abs(dx) > 50) {
+      touchStartX=0;
 
-        if (dx < 0) {
+      if(Math.abs(dx)>50){
+
+        if(dx<0){
           nextImg();
-        } else {
+        }else{
           prevImg();
         }
 
       }
 
     },
-    { passive: true }
+    {passive:true}
   );
 
 }
 
 
-/* ===============================
-   JALANKAN GALERI
-================================ */
+/* =====================================================
+   CATEGORY GALLERY
+===================================================== */
 
-document.addEventListener('DOMContentLoaded', function() {
+function openCategoryGallery(title,images){
 
-  renderAlbumGallery();
+  const modal=
+    document.getElementById('categoryModal');
+
+  const titleBox=
+    document.getElementById('categoryTitle');
+
+  const imageBox=
+    document.getElementById('categoryImages');
+
+  if(!modal || !titleBox || !imageBox){
+    return;
+  }
+
+  titleBox.textContent=title;
+
+  imageBox.innerHTML=
+    images.map(src=>`
+
+      <img
+        src="${src}"
+        alt="${title}"
+        loading="lazy">
+
+    `).join('');
+
+  modal.classList.add('show');
+
+  document.body.classList.add('no-scroll');
+
+}
+
+
+function closeCategoryGallery(){
+
+  const modal=
+    document.getElementById('categoryModal');
+
+  if(!modal){
+    return;
+  }
+
+  modal.classList.remove('show');
+
+  document.body.classList.remove('no-scroll');
+
+}
+
+
+document
+  .getElementById('categoryModal')
+  ?.addEventListener('click',e=>{
+
+    if(e.target.id==='categoryModal'){
+      closeCategoryGallery();
+    }
+
+  });
+
+
+/* =====================================================
+   ESCAPE CATEGORY
+===================================================== */
+
+document.addEventListener('keydown',e=>{
+
+  const category=
+    document.getElementById('categoryModal');
+
+  if(
+    e.key==='Escape' &&
+    category &&
+    category.classList.contains('show')
+  ){
+
+    closeCategoryGallery();
+
+  }
 
 });
-</script>
 
-<!-- =====================================================
-     OPENING VIDEO OVERLAY
-     ===================================================== -->
 
-<script>
-
-(function(){
-
-  const overlay=
-    document.getElementById(
-      'pmbOpeningOverlay'
-    );
-
-  const video=
-    document.getElementById(
-      'openingVideo'
-    );
-
-  const closeBtn=
-    overlay.querySelector(
-      '.pmb-opening-close'
-    );
-
-  if(!overlay || !video)return;
-
-
-  /* BUKA OVERLAY */
-
-  function openOverlay(){
-
-    overlay.classList.add('show');
-
-    document.body.style.overflow='hidden';
-
-    video.currentTime=0;
-
-    const playPromise=
-      video.play();
-
-    if(playPromise){
-
-      playPromise.catch(()=>{});
-
-    }
-
-  }
-
-
-  /* TUTUP OVERLAY */
-
-  function closeOverlay(){
-
-    overlay.classList.add('closing');
-
-    video.pause();
-
-    setTimeout(()=>{
-
-      overlay.classList.remove(
-        'show',
-        'closing'
-      );
-
-      document.body.style.overflow='';
-
-    },380);
-
-  }
-
-
-  /* MUNCUL OTOMATIS */
-
-  window.addEventListener(
-    'load',
-    ()=>{
-      setTimeout(
-        openOverlay,
-        250
-      );
-    }
-  );
-
-
-  /* TOMBOL X */
-
-  closeBtn.addEventListener(
-    'click',
-    (e)=>{
-
-      e.stopPropagation();
-
-      closeOverlay();
-
-    }
-  );
-
-
-  /* KLIK AREA LUAR VIDEO */
-
-  overlay.addEventListener(
-    'click',
-    (e)=>{
-
-      if(e.target===overlay){
-
-        closeOverlay();
-
-      }
-
-    }
-  );
-
-
-  /* ESC */
-
-  document.addEventListener(
-    'keydown',
-    (e)=>{
-
-      if(
-        e.key==='Escape' &&
-        overlay.classList.contains('show')
-      ){
-
-        closeOverlay();
-
-      }
-
-    }
-  );
-
-})();
-
-</script>
-
-
-<!-- =====================================================
-     PROGRAM GALLERY
-     ===================================================== -->
-
-<script>
-
-const programGalleryNames={
-
-  quran:"Education Based on the Qur'an and Hadits",
-
-  inclusion:"Inclusion Islamic School",
-
-  language:"Arabic and English Habituation",
-
-  leadership:"Leadership and Entrepreneurship",
-
-  environment:"Sekolah Berbudaya Lingkungan (SBL)"
-
-};
-
-
-let programMode=false;
-
-let programLightboxItems=[];
-
-let programCurrent=0;
-
-
-/* OPEN PROGRAM GALLERY */
+/* =====================================================
+   PROGRAM GALLERY
+===================================================== */
 
 function openProgramGallery(items,index){
+
+  if(!Array.isArray(items) || !items.length){
+    return;
+  }
 
   programMode=true;
 
@@ -2431,54 +2614,75 @@ function openProgramGallery(items,index){
   const modal=
     document.getElementById('modal');
 
+  if(!modal){
+    return;
+  }
+
   modal.classList.add('show');
 
-  document.body.style.overflow='hidden';
+  document.body.classList.add('no-scroll');
 
   showProgramImage();
 
 }
 
 
-/* SHOW PROGRAM IMAGE */
-
 function showProgramImage(){
+
+  if(!programLightboxItems.length){
+    return;
+  }
 
   const item=
     programLightboxItems[programCurrent];
 
-  if(!item)return;
+  if(!item){
+    return;
+  }
 
   const img=
     document.getElementById('modalImg');
 
-  img.classList.remove(
-    'lightbox-change'
-  );
+  const caption=
+    document.getElementById('modalCaption');
+
+  const counter=
+    document.getElementById('modalCounter');
+
+  if(!img){
+    return;
+  }
+
+  img.classList.remove('lightbox-change');
 
   void img.offsetWidth;
 
   img.src=item.url;
 
-  document
-    .getElementById('modalCaption')
-    .textContent=item.title;
+  img.alt=item.title || 'Dokumentasi program';
 
-  document
-    .getElementById('modalCounter')
-    .textContent=
+  if(caption){
+    caption.textContent=
+      item.title || '';
+  }
+
+  if(counter){
+
+    counter.textContent=
       `${programCurrent+1} / ${programLightboxItems.length}`;
 
-  img.classList.add(
-    'lightbox-change'
-  );
+  }
+
+  img.classList.add('lightbox-change');
 
 }
 
 
-/* NEXT PROGRAM */
-
 function nextProgram(){
+
+  if(!programLightboxItems.length){
+    return;
+  }
 
   programCurrent=
     (programCurrent+1)%
@@ -2489,88 +2693,33 @@ function nextProgram(){
 }
 
 
-/* PREVIOUS PROGRAM */
-
 function prevProgram(){
 
+  if(!programLightboxItems.length){
+    return;
+  }
+
   programCurrent=
-    (programCurrent-1+
-      programLightboxItems.length)%
-      programLightboxItems.length;
+    (
+      programCurrent-1+
+      programLightboxItems.length
+    )%
+    programLightboxItems.length;
 
   showProgramImage();
 
 }
 
 
-/* PROGRAM NAVIGATION */
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
 
-const originalNextImg=
-  nextImg;
+function escapeHtml(value){
 
-const originalPrevImg=
-  prevImg;
-
-
-nextImg=function(){
-
-  if(
-    programMode &&
-    programLightboxItems.length
-  ){
-
-    nextProgram();
-
-  }else{
-
-    originalNextImg();
-
-  }
-
-};
-
-
-prevImg=function(){
-
-  if(
-    programMode &&
-    programLightboxItems.length
-  ){
-
-    prevProgram();
-
-  }else{
-
-    originalPrevImg();
-
-  }
-
-};
-
-
-/* CLOSE PROGRAM */
-
-const originalCloseImg=
-  closeImg;
-
-closeImg=function(){
-
-  programMode=false;
-
-  programLightboxItems=[];
-
-  originalCloseImg();
-
-};
-
-
-/* ESCAPE HTML */
-
-function escapeHtml(v){
-
-  return String(v).replace(
+  return String(value).replace(
     /[&<>"']/g,
-    c=>({
+    char=>({
 
       '&':'&amp;',
       '<':'&lt;',
@@ -2578,138 +2727,131 @@ function escapeHtml(v){
       '"':'&quot;',
       "'":'&#39;'
 
-    }[c])
-
+    }[char])
   );
 
 }
 
 
-/* RENDER PROGRAM GALLERY */
+/* =====================================================
+   RENDER PROGRAM GALLERY
+===================================================== */
 
 function renderProgramGallery(items){
 
-  document
-    .querySelectorAll(
+  const galleries=
+    document.querySelectorAll(
       '[data-gallery-program]'
-    )
-    .forEach(el=>{
+    );
 
-      const cat=
-        el.dataset.galleryProgram;
+  galleries.forEach(el=>{
 
-      const list=
-        items.filter(
-          x=>x.category===cat
-        );
+    const category=
+      el.dataset.galleryProgram;
 
-
-      if(!list.length){
-
-        el.innerHTML=
-          '<div class="program-gallery-empty">Belum ada dokumentasi</div>';
-
-        return;
-
-      }
+    const list=
+      Array.isArray(items)
+        ? items.filter(
+            item=>item.category===category
+          )
+        : [];
 
 
-      const preview=
-        list.slice(0,2);
+    if(!list.length){
+
+      el.innerHTML=`
+        <div class="program-gallery-empty">
+          Belum ada dokumentasi
+        </div>
+      `;
+
+      return;
+    }
 
 
-      el.innerHTML=
-
-        preview
-          .map((x,i)=>`
-
-            <button
-              class="program-gallery-item"
-              type="button">
-
-              <img
-                src="${x.url}"
-                alt="${escapeHtml(x.title)}"
-                loading="lazy">
-
-              <div class="program-gallery-caption">
-                ${escapeHtml(x.title)}
-              </div>
-
-            </button>
-
-          `)
-          .join('')
+    const preview=
+      list.slice(0,2);
 
 
-        +
+    el.innerHTML=
+      preview.map((item,index)=>`
 
-        (
+        <button
+          class="program-gallery-item"
+          type="button">
 
-          list.length>2
+          <img
+            src="${item.url}"
+            alt="${escapeHtml(item.title || '')}"
+            loading="lazy">
 
-          ?
+          <div class="program-gallery-caption">
+            ${escapeHtml(item.title || '')}
+          </div>
 
-          `<button
-            class="show-all-gallery"
-            type="button">
-            + Lihat Semua Dokumentasi (${list.length})
-          </button>`
+        </button>
 
-          :
-
-          ''
-
-        );
-
-
-      el
-        .querySelectorAll(
-          '.program-gallery-item'
-        )
-        .forEach((btn,i)=>{
-
-          btn.addEventListener(
-            'click',
-            ()=>openProgramGallery(
-              list,
-              i
-            )
-          );
-
-        });
+      `).join('');
 
 
-      const showBtn=
-        el.querySelector(
-          '.show-all-gallery'
-        );
+    el
+      .querySelectorAll('.program-gallery-item')
+      .forEach((button,index)=>{
 
-
-      if(showBtn){
-
-        showBtn.addEventListener(
+        button.addEventListener(
           'click',
-          ()=>openProgramGallery(
+          ()=>{
+            openProgramGallery(
+              list,
+              index
+            );
+          }
+        );
+
+      });
+
+
+    if(list.length>2){
+
+      const showAll=
+        document.createElement('button');
+
+      showAll.type='button';
+
+      showAll.className=
+        'show-all-gallery';
+
+      showAll.textContent=
+        `+ Lihat Semua Dokumentasi (${list.length})`;
+
+      showAll.addEventListener(
+        'click',
+        ()=>{
+          openProgramGallery(
             list,
             0
-          )
-        );
+          );
+        }
+      );
 
-      }
+      el.appendChild(showAll);
 
-    });
+    }
+
+  });
 
 }
 
 
-/* LOAD DARI API NETLIFY */
+/* =====================================================
+   LOAD PROGRAM GALLERY DARI NETLIFY
+===================================================== */
 
-(async function loadProgramGallery(){
+async function loadProgramGallery(){
 
   try{
 
-    const r=
+    const response=
       await fetch(
         '/api/gallery',
         {
@@ -2717,23 +2859,295 @@ function renderProgramGallery(items){
         }
       );
 
-    if(!r.ok)return;
+    if(!response.ok){
+      return;
+    }
 
-    const d=
-      await r.json();
+    const data=
+      await response.json();
 
     renderProgramGallery(
-      d.items||[]
+      data.items || []
     );
 
-  }catch(e){
+  }catch(error){
 
     console.log(
       'Galeri program belum tersedia:',
-      e
+      error
     );
 
   }
+
+}
+
+
+/* =====================================================
+   REVEAL IMAGES
+===================================================== */
+
+function initRevealImages(){
+
+  const elements=
+    document.querySelectorAll('.reveal-img');
+
+  if(!elements.length){
+    return;
+  }
+
+  if(!('IntersectionObserver' in window)){
+
+    elements.forEach(el=>{
+      el.classList.add('is-visible');
+    });
+
+    return;
+  }
+
+  const observer=
+    new IntersectionObserver(
+      entries=>{
+
+        entries.forEach(entry=>{
+
+          if(entry.isIntersecting){
+
+            entry.target.classList.add(
+              'is-visible'
+            );
+
+            observer.unobserve(
+              entry.target
+            );
+
+          }
+
+        });
+
+      },
+      {
+        threshold:.1
+      }
+    );
+
+  elements.forEach(el=>{
+    observer.observe(el);
+  });
+
+}
+
+
+/* =====================================================
+   CEK GAMBAR GALERI
+===================================================== */
+
+function setupImageFallback(){
+
+  document
+    .querySelectorAll(
+      '#albumGallery .g'
+    )
+    .forEach(card=>{
+
+      const bg=
+        card.style.backgroundImage;
+
+      if(!bg){
+        return;
+      }
+
+    });
+
+}
+
+
+/* =====================================================
+   DOM READY
+===================================================== */
+
+document.addEventListener(
+  'DOMContentLoaded',
+  ()=>{
+
+    renderAlbumGallery();
+
+    initRevealImages();
+
+    setupImageFallback();
+
+    loadProgramGallery();
+
+  }
+);
+
+</script>
+
+
+<!-- =====================================================
+     OPENING OVERLAY JPG SCRIPT
+===================================================== -->
+
+<script>
+
+(function(){
+
+  const overlay=
+    document.getElementById(
+      'pmbOpeningOverlay'
+    );
+
+  if(!overlay){
+    return;
+  }
+
+  const image=
+    document.getElementById(
+      'openingImage'
+    );
+
+  const closeBtn=
+    overlay.querySelector(
+      '.pmb-opening-close'
+    );
+
+
+  /* =========================
+     OPEN
+  ========================= */
+
+  function openOpening(){
+
+    overlay.classList.remove('closing');
+
+    overlay.classList.add('show');
+
+    document.body.classList.add('no-scroll');
+
+  }
+
+
+  /* =========================
+     CLOSE
+  ========================= */
+
+  function closeOpening(){
+
+    if(!overlay.classList.contains('show')){
+      return;
+    }
+
+    overlay.classList.add('closing');
+
+    setTimeout(()=>{
+
+      overlay.classList.remove(
+        'show',
+        'closing'
+      );
+
+      document.body.classList.remove(
+        'no-scroll'
+      );
+
+    },380);
+
+  }
+
+
+  /* =========================
+     TAMPIL OTOMATIS
+  ========================= */
+
+  window.addEventListener(
+    'load',
+    ()=>{
+
+      setTimeout(
+        openOpening,
+        300
+      );
+
+    }
+  );
+
+
+  /* =========================
+     KLIK GAMBAR
+  ========================= */
+
+  if(image){
+
+    image.addEventListener(
+      'click',
+      e=>{
+
+        e.stopPropagation();
+
+        closeOpening();
+
+      }
+    );
+
+  }
+
+
+  /* =========================
+     TOMBOL X
+  ========================= */
+
+  if(closeBtn){
+
+    closeBtn.addEventListener(
+      'click',
+      e=>{
+
+        e.stopPropagation();
+
+        closeOpening();
+
+      }
+    );
+
+  }
+
+
+  /* =========================
+     AREA LUAR
+  ========================= */
+
+  overlay.addEventListener(
+    'click',
+    e=>{
+
+      if(e.target===overlay){
+
+        closeOpening();
+
+      }
+
+    }
+  );
+
+
+  /* =========================
+     ESC
+  ========================= */
+
+  document.addEventListener(
+    'keydown',
+    e=>{
+
+      if(
+        e.key==='Escape' &&
+        overlay.classList.contains('show')
+      ){
+
+        closeOpening();
+
+      }
+
+    }
+  );
 
 })();
 
@@ -2742,16 +3156,13 @@ function renderProgramGallery(items){
 
 <!-- =====================================================
      HISTATS
-     ===================================================== -->
-
-<!-- Histats.com START -->
+===================================================== -->
 
 <div id="histats_counter"></div>
 
 <script type="text/javascript">
 
-var _Hasync =
-  _Hasync || [];
+var _Hasync = _Hasync || [];
 
 _Hasync.push([
   'Histats.start',
@@ -2774,19 +3185,17 @@ _Hasync.push([
   var hs=
     document.createElement('script');
 
-  hs.type=
-    'text/javascript';
+  hs.type='text/javascript';
 
   hs.async=true;
 
   hs.src=
-    ('//s10.histats.com/js15_as.js');
+    '//s10.histats.com/js15_as.js';
 
   (
     document.getElementsByTagName('head')[0] ||
     document.getElementsByTagName('body')[0]
-  )
-  .appendChild(hs);
+  ).appendChild(hs);
 
 })();
 
@@ -2795,8 +3204,9 @@ _Hasync.push([
 
 <noscript>
 
-  <a href="/"
-     target="_blank">
+  <a
+    href="/"
+    target="_blank">
 
     <img
       src="//sstatic1.histats.com/0.gif?5055425&101"
@@ -2807,8 +3217,7 @@ _Hasync.push([
 
 </noscript>
 
-<!-- Histats.com END -->
-
 
 </body>
 </html>
+```
